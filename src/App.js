@@ -13,15 +13,19 @@ class App extends Component {
 		showPersons: false,
 	};
 
-	// nameChangeHandler = (event) => {
-	// 	this.setState({
-	// 		persons: [
-	// 			{ name: 'Max', age: 28 },
-	// 			{ name: event.target.value, age: 26 },
-	// 			{ name: 'John', age: 30 },
-	// 		],
-	// 	});
-	// };
+	nameChangeHandler = (event, id) => {
+		const personIndex = this.state.persons.findIndex((person) => {
+			return person.id === id;
+		});
+		const person = { ...this.state.persons[personIndex] };
+		person.name = event.target.value;
+		const persons = [...this.state.persons];
+		persons[personIndex] = person;
+
+		this.setState({
+			persons,
+		});
+	};
 
 	deletePersonHandler = (personIndex) => {
 		//This is used to create a copy of persons array
@@ -56,7 +60,8 @@ class App extends Component {
 								click={() => this.deletePersonHandler(index)}
 								name={person.name}
 								age={person.age}
-								key={person.id}></Person>
+								key={person.id}
+								changed={(event) => this.nameChangeHandler(event, person.id)}></Person>
 						);
 					})}
 				</div>
