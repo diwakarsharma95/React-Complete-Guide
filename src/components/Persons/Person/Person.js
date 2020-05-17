@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import classes from './Person.module.css';
+import classes from '../Person/Person.module.css';
 
 const person = (props) => {
 	return (
